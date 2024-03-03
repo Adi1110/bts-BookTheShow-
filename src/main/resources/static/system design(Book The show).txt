@@ -1,0 +1,21 @@
+########################################## "Book The Show" system design###########################################################
+
+
+Database tables--
+
+movie - id, title, description, duration, language, release date, country, genre
+cinema - id, name, total cinema hall, location
+show - id, movieid, showtime, start time, end time
+cinema - id, name, total seats
+show seat- id, seat no., is reserved, price, showid
+booking - id, booking number, no. of seats booked, created on, booking status, showid
+
+
+ 
+
+APIs---
+
+search movie(movie name, city,date, ) -> list of shows
+getShowdetails(showid, list of seats)
+reservedSeats(show id, list of seatIds)-> status of the reservation
+

@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codeOlogy.booktheshow.entity.JWTRequest;
+import com.codeOlogy.booktheshow.entity.JWTResponse;
+import com.codeOlogy.booktheshow.entity.User;
 import com.codeOlogy.booktheshow.helper.JwtUtil;
-import com.codeOlogy.booktheshow.model.JWTRequest;
-import com.codeOlogy.booktheshow.model.JWTResponse;
-import com.codeOlogy.booktheshow.model.User;
 import com.codeOlogy.booktheshow.services.UserServiceImpl;
 
 /**

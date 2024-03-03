@@ -1,4 +1,4 @@
-package com.codeOlogy.booktheshow.model;
+package com.codeOlogy.booktheshow.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,15 +12,14 @@ import lombok.ToString;
  * Youtube : @Code_O_logy
  * Website : blogsnax.com
  */
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @ToString
-public class JWTResponse {
-    
-    private String jwtToken;
-    private String username;
+public class JWTRequest {
+
+	private String email;
+    private String password;
 }

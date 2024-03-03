@@ -1,4 +1,4 @@
-package com.codeOlogy.booktheshow.model;
+package com.codeOlogy.booktheshow.entity;
 
 import java.util.Collection;
 

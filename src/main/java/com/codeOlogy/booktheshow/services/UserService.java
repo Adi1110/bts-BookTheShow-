@@ -2,7 +2,7 @@ package com.codeOlogy.booktheshow.services;
 
 import java.util.List;
 
-import com.codeOlogy.booktheshow.model.User;
+import com.codeOlogy.booktheshow.entity.User;
 
 /**
  * @author Aditya Ranjan
