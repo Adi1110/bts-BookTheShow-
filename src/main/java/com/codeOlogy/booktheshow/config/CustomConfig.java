@@ -16,19 +16,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 import com.codeOlogy.booktheshow.security.JWTAuthenticationFilter;
 import com.codeOlogy.booktheshow.security.JWTEntryPoint;
 
-
 /**
  * @author Aditya Ranjan
- * Youtube : @Code_O_logy
- * Website : blogsnax.com
+ *         Youtube : @Code_O_logy
+ *         Website : blogsnax.com
  */
 
 @Configuration
 public class CustomConfig {
 
-	@Autowired
+    @Autowired
     private JWTEntryPoint point;
-    
+
     @Autowired
     private JWTAuthenticationFilter filter;
 
@@ -38,30 +37,29 @@ public class CustomConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-	@Bean
+    @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         http.csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.disable())
+                .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/bts/**").authenticated()
-                .requestMatchers("/auth/login").permitAll()
-                .requestMatchers("/auth/register").permitAll()
-				.requestMatchers("/bts/updateUser").permitAll()
-                .anyRequest()
-                .authenticated())
+                        .requestMatchers("/bts/**").authenticated()
+                        .requestMatchers("/movies/search-movie").authenticated()
+                        .requestMatchers("/auth/login").permitAll()
+                        .requestMatchers("/auth/register").permitAll()
+                        .requestMatchers("/bts/updateUser").permitAll()
+                        .anyRequest()
+                        .authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
-                http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
-    
+        http.addFilterBefore(filter, UsernamePasswordAuthenticationFilter.class);
+
         return http.build();
     }
-	
 
-	
     @Bean
-    public DaoAuthenticationProvider daoAuthenticationProvider(){
+    public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder);
@@ -70,7 +68,7 @@ public class CustomConfig {
     }
 
     @Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
-		return builder.getAuthenticationManager();
-	}
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration builder) throws Exception {
+        return builder.getAuthenticationManager();
+    }
 }

@@ -39,9 +39,11 @@ public class ShowsSeat {
     @Column(name = "isReserved")
     private String seatStatus;
 
-    // private Long showsId;
+    // @ManyToMany
+    // private Shows showsId;
 
-    private Long theatreId;
+    // @ManyToMany
+    // private Theaters theatreId;
 
     private double price;
 
