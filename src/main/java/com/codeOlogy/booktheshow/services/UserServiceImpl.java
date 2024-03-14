@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.codeOlogy.booktheshow.model.User;
+import com.codeOlogy.booktheshow.entity.User;
 import com.codeOlogy.booktheshow.repository.UserRepository;
 
 /**

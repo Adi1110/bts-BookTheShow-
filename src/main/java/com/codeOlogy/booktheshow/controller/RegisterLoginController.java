@@ -14,46 +14,44 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.codeOlogy.booktheshow.entity.JWTRequest;
+import com.codeOlogy.booktheshow.entity.JWTResponse;
+import com.codeOlogy.booktheshow.entity.User;
 import com.codeOlogy.booktheshow.helper.JwtUtil;
-import com.codeOlogy.booktheshow.model.JWTRequest;
-import com.codeOlogy.booktheshow.model.JWTResponse;
-import com.codeOlogy.booktheshow.model.User;
 import com.codeOlogy.booktheshow.services.UserServiceImpl;
 
 /**
  * @author Aditya Ranjan
- * Youtube : @Code_O_logy
- * Website : blogsnax.com
+ *         Youtube : @Code_O_logy
+ *         Website : blogsnax.com
  */
 
 @RestController
 @RequestMapping("/auth")
 public class RegisterLoginController {
 
+    @Autowired
+    private UserDetailsService userService;
 
-	@Autowired
-	private UserDetailsService userService;
-	
-	@Autowired
-	private JwtUtil jwtUtil;
-	
-	@Autowired
-	private AuthenticationManager manager;
+    @Autowired
+    private JwtUtil jwtUtil;
+
+    @Autowired
+    private AuthenticationManager manager;
 
     @Autowired
     private UserServiceImpl service;
-	
-	@RequestMapping("/welcome")
-	public String welcome() {
-		
-		return "welcome to JWT";
-	}
-	
-	@PostMapping("/login")
+
+    @RequestMapping("/welcome")
+    public String welcome() {
+
+        return "welcome to JWT";
+    }
+
+    @PostMapping("/login")
     public ResponseEntity<JWTResponse> login(@RequestBody JWTRequest request) {
 
         this.doAuthenticate(request.getEmail(), request.getPassword());
-
 
         UserDetails userDetails = userService.loadUserByUsername(request.getEmail());
         String token = this.jwtUtil.generateToken(userDetails);
@@ -70,7 +68,6 @@ public class RegisterLoginController {
         try {
             manager.authenticate(authentication);
 
-
         } catch (BadCredentialsException e) {
             throw new BadCredentialsException(" Invalid Username or Password  !!");
         }
@@ -82,11 +79,9 @@ public class RegisterLoginController {
         return "Credentials Invalid !!";
     }
 
-
     @PostMapping("/register")
-    public User createUser(@RequestBody User user){
+    public User createUser(@RequestBody User user) {
         return service.createUser(user);
     }
-
 
 }
