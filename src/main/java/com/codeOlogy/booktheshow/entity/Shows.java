@@ -41,6 +41,7 @@ public class Shows {
     // @ManyToMany
     // private Theaters theatreId;
 
+    @OneToMany(mappedBy = "shows")
     private List<Seat> listOfSeats;
 
     @OneToMany(mappedBy = "shows") // mappedBy should be the name of the property in Movie entity referring to
