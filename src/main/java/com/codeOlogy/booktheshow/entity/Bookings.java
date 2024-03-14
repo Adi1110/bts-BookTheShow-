@@ -2,6 +2,8 @@ package com.codeOlogy.booktheshow.entity;
 
 import java.util.List;
 
+import com.codeOlogy.booktheshow.enums.BookingStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -44,7 +46,5 @@ public class Bookings {
     private String seatType;
     private String totalCost;
 
-    private enum bookingStatus {
-        CONFIRMED, CANCELLED
-    }
+    private BookingStatus bookingStatus;
 }

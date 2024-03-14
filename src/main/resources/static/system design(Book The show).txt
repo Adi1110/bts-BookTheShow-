@@ -16,7 +16,7 @@ booking - id, booking number, no. of seats booked, created on, booking status, s
 APIs---
 
 setCity() -> show theater on selected city.
-search movie(movie name, city,date, ) -> list of shows
+search movie(movie name, time,date, ) -> list of shows
 getShowdetails(showid, list of seats)
 reservedSeats(show id, list of seatIds)-> status of the reservation
 

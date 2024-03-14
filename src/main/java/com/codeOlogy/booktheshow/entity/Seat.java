@@ -1,6 +1,7 @@
 package com.codeOlogy.booktheshow.entity;
 
-import jakarta.persistence.Column;
+import com.codeOlogy.booktheshow.enums.SeatStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,25 +27,18 @@ import lombok.ToString;
 @ToString
 @Data
 @Entity
-@Table(name = "shows_seat")
-public class ShowsSeat {
+@Table(name = "seats")
+public class Seat {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String seatNumber;
+
     private String seatType;
 
-    @Column(name = "isReserved")
-    private String seatStatus;
-
-    // @ManyToMany
-    // private Shows showsId;
-
-    // @ManyToMany
-    // private Theaters theatreId;
+    private SeatStatus seatStatus;
 
     private double price;
-
 }

@@ -41,11 +41,13 @@ public class Shows {
     // @ManyToMany
     // private Theaters theatreId;
 
+    private List<Seat> listOfSeats;
+
     @OneToMany(mappedBy = "shows") // mappedBy should be the name of the property in Movie entity referring to
     private List<Movies> movies;
 
     private LocalDate showDate;
-    private String showTime;
+
     private String startTime;
     private String endTime;
 }

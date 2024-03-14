@@ -30,7 +30,7 @@ public class MovieService {
         return allShows.stream()
                 .filter(show -> movieName == null || show.getMovies().stream()
                         .anyMatch(movie -> movie.getMovieTitle().equalsIgnoreCase(movieName)))
-                .filter(show -> time == null || show.getShowTime().equalsIgnoreCase(time))
+                .filter(show -> time == null || show.getStartTime().equalsIgnoreCase(time))
                 .filter(show -> date == null || show.getShowDate().isEqual(date))
                 .collect(Collectors.toList());
     }
