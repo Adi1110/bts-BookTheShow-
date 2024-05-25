@@ -13,6 +13,12 @@ import com.codeOlogy.booktheshow.exceptionHandler.SeatNotFoundException;
 import com.codeOlogy.booktheshow.exceptionHandler.ShowNotFoundException;
 import com.codeOlogy.booktheshow.services.ShowsService;
 
+/**
+ * @author Aditya Ranjan
+ *         Youtube : @Code_O_logy
+ *         Website : blogsnax.com
+ */
+
 @RestController
 public class ShowsController {
 

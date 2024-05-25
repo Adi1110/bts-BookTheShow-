@@ -6,6 +6,7 @@ package com.codeOlogy.booktheshow.enums;
  *         Website : blogsnax.com
  */
 
-public enum BookingStatus {
-    CONFIRMED, CANCELLED, PENDING;
+public enum Genre {
+
+    ACTION, ADVENTURE, COMEDY, DRAMA, HORROR, SCI_FI, ROM_COM, FANTASY;
 }

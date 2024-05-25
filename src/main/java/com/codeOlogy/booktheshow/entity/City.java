@@ -1,13 +1,13 @@
 package com.codeOlogy.booktheshow.entity;
 
-import java.time.LocalDate;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +21,6 @@ import lombok.ToString;
  *         Youtube : @Code_O_logy
  *         Website : blogsnax.com
  */
-
 @Setter
 @Getter
 @NoArgsConstructor
@@ -29,29 +28,15 @@ import lombok.ToString;
 @ToString
 @Data
 @Entity
-@Table(name = "shows")
-public class Shows {
+@Table(name = "cities")
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String showName;
+    private String name;
 
-    // @ManyToMany
-    // private Theaters theatreId;
-
-    @OneToMany(mappedBy = "shows")
-
-    private List<Seat> listOfSeats;
-
-    @OneToMany(mappedBy = "shows") // mappedBy should be the name of the property in Movie entity referring to
-    private List<Movies> movies;
-
-    private LocalDate showDate;
-
-    private String description;
-
-    private String startTime;
-    private String endTime;
+    @ManyToMany(mappedBy = "cities")
+    private Set<Movies> movies = new HashSet<>();
 }

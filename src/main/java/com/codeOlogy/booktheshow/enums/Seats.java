@@ -6,6 +6,6 @@ package com.codeOlogy.booktheshow.enums;
  *         Website : blogsnax.com
  */
 
-public enum BookingStatus {
-    CONFIRMED, CANCELLED, PENDING;
+public enum Seats {
+    REGULAR, PREMIUM, RECLINER;
 }

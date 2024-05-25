@@ -1,5 +1,11 @@
 package com.codeOlogy.booktheshow.enums;
 
+/**
+ * @author Aditya Ranjan
+ *         Youtube : @Code_O_logy
+ *         Website : blogsnax.com
+ */
+
 public enum SeatStatus {
-    AVAILABLE, BOOKED, HOLD
+    BOOKED, AVAILABLE, RESERVED, NOT_AVAILABLE, HOLD;
 }

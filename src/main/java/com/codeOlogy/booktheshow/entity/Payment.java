@@ -1,4 +1,4 @@
-package com.codeOlogy.booktheshow.enums;
+package com.codeOlogy.booktheshow.entity;
 
 /**
  * @author Aditya Ranjan
@@ -6,6 +6,6 @@ package com.codeOlogy.booktheshow.enums;
  *         Website : blogsnax.com
  */
 
-public enum BookingStatus {
-    CONFIRMED, CANCELLED, PENDING;
+public interface Payment {
+
 }
