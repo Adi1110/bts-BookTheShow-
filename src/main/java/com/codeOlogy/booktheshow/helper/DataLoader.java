@@ -67,5 +67,6 @@ public class DataLoader implements CommandLineRunner {
                 // Add more movies as needed
 
                 movieService.saveMovies(Arrays.asList(movie1, movie2));
+                movieService.printMoviesWithCityNames(); // To print movies with city names
         }
 }

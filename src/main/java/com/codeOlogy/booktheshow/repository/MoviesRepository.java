@@ -19,5 +19,5 @@ public interface MoviesRepository extends JpaRepository<Movies, Long> {
 
     public List<Movies> findAll();
 
-    public Optional<Movies> findByMovieTitleAndReleaseDate(String movieTitle, Date releaseDate);
+    Optional<Movies> findByMovieTitleAndReleaseDate(String movieTitle, Date releaseDate);
 }
