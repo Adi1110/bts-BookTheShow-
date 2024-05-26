@@ -2,6 +2,7 @@ package com.codeOlogy.booktheshow.services;
 
 import java.util.List;
 
+import com.codeOlogy.booktheshow.entity.City;
 import com.codeOlogy.booktheshow.entity.Movies;
 import com.codeOlogy.booktheshow.enums.Genre;
 import com.codeOlogy.booktheshow.enums.Language;
@@ -20,5 +21,5 @@ public interface Search {
 
     public List<Movies> searchMoviesByLanguage(Language language);
 
-    // public List<Movies> searchMoviesByDate(Date releaseDate);
+    public List<Movies> searchMoviesByCity(City city);
 }

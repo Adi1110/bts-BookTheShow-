@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.codeOlogy.booktheshow.entity.City;
 import com.codeOlogy.booktheshow.entity.Movies;
 import com.codeOlogy.booktheshow.enums.Genre;
 import com.codeOlogy.booktheshow.enums.Language;
@@ -43,7 +44,7 @@ public class SearchImpl implements Search {
         // Fetch all movies from the repository
         List<Movies> allMovies = moviesRepository.findAll();
 
-        // Filter the movies by the provided name and return the list
+        // Filter the movies by the provided genre and return the list
         return allMovies.stream()
                 .filter(movie -> movie.getGenre().equals(genre))
                 .collect(Collectors.toList());
@@ -54,7 +55,7 @@ public class SearchImpl implements Search {
         // Fetch all movies from the repository
         List<Movies> allMovies = moviesRepository.findAll();
 
-        // Filter the movies by the provided name and return the list
+        // Filter the movies by the provided language and return the list
         return allMovies.stream()
                 .filter(movie -> movie.getLanguage().equals(language))
                 .collect(Collectors.toList());
@@ -64,7 +65,14 @@ public class SearchImpl implements Search {
 
     // }
 
-    // public List<Movies> searchMoviesByCity(City city) {
+    public List<Movies> searchMoviesByCity(City city) {
 
-    // }
+        // Fetch all movies from the repository
+        List<Movies> allMovies = moviesRepository.findAll();
+
+        // Filter the movies by the provided city and return the list
+        return allMovies.stream()
+                .filter(movie -> movie.getCities().contains(city))
+                .collect(Collectors.toList());
+    }
 }
