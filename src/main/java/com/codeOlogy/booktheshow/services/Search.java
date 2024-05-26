@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.codeOlogy.booktheshow.entity.Movies;
 import com.codeOlogy.booktheshow.enums.Genre;
+import com.codeOlogy.booktheshow.enums.Language;
 
 /**
  * @author Aditya Ranjan
@@ -17,7 +18,7 @@ public interface Search {
 
     public List<Movies> searchMoviesByGenre(Genre genre);
 
-    public List<Movies> searchMoviesByLanguage(String language);
+    public List<Movies> searchMoviesByLanguage(Language language);
 
     // public List<Movies> searchMoviesByDate(Date releaseDate);
 }

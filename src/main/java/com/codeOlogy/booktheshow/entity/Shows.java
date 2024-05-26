@@ -3,6 +3,8 @@ package com.codeOlogy.booktheshow.entity;
 import java.time.LocalDate;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -46,6 +48,9 @@ public class Shows {
     private List<Seat> listOfSeats;
 
     @OneToMany(mappedBy = "shows") // mappedBy should be the name of the property in Movie entity referring to
+    @JsonIgnore // JSON serialization annotations to avoid serializing the entire object graph.
+                // The @JsonIgnore annotation from the Jackson library can help prevent the
+                // infinite loop by ignoring the reverse reference.
     private List<Movies> movies;
 
     private LocalDate showDate;

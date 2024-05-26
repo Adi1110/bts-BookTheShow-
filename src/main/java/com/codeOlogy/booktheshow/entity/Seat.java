@@ -1,6 +1,7 @@
 package com.codeOlogy.booktheshow.entity;
 
 import com.codeOlogy.booktheshow.enums.SeatStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -44,6 +45,9 @@ public class Seat {
 
     @ManyToOne
     @JoinColumn(name = "shows_id") // Assuming the foreign key column name is shows_id
+    @JsonIgnore // JSON serialization annotations to avoid serializing the entire object graph.
+                // The @JsonIgnore annotation from the Jackson library can help prevent the
+                // infinite loop by ignoring the reverse reference.
     private Shows shows;
 
     private double price;

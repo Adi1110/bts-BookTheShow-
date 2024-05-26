@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.codeOlogy.booktheshow.entity.Movies;
 import com.codeOlogy.booktheshow.enums.Genre;
+import com.codeOlogy.booktheshow.enums.Language;
 import com.codeOlogy.booktheshow.repository.MoviesRepository;
 
 /**
@@ -48,7 +49,7 @@ public class SearchImpl implements Search {
                 .collect(Collectors.toList());
     }
 
-    public List<Movies> searchMoviesByLanguage(String language) {
+    public List<Movies> searchMoviesByLanguage(Language language) {
 
         // Fetch all movies from the repository
         List<Movies> allMovies = moviesRepository.findAll();

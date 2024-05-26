@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 
 import com.codeOlogy.booktheshow.enums.Genre;
 import com.codeOlogy.booktheshow.enums.Language;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -59,6 +60,9 @@ public class Movies {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "movie_city", joinColumns = @JoinColumn(name = "movie_id"), inverseJoinColumns = @JoinColumn(name = "city_id"))
+    @JsonIgnore // JSON serialization annotations to avoid serializing the entire object graph.
+                // The @JsonIgnore annotation from the Jackson library can help prevent the
+                // infinite loop by ignoring the reverse reference.
     private Set<City> cities = new HashSet<>();
 
     @Column(name = "cities")

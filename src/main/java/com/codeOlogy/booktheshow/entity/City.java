@@ -3,6 +3,8 @@ package com.codeOlogy.booktheshow.entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -38,5 +40,8 @@ public class City {
     private String name;
 
     @ManyToMany(mappedBy = "cities")
+    @JsonIgnore // JSON serialization annotations to avoid serializing the entire object graph.
+                // The @JsonIgnore annotation from the Jackson library can help prevent the
+                // infinite loop by ignoring the reverse reference.
     private Set<Movies> movies = new HashSet<>();
 }
