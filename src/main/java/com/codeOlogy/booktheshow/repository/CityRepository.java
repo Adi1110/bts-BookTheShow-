@@ -1,8 +1,10 @@
 package com.codeOlogy.booktheshow.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.codeOlogy.booktheshow.entity.ShowsSeat;
+import com.codeOlogy.booktheshow.entity.City;
 
 /**
  * @author Aditya Ranjan
@@ -10,6 +12,7 @@ import com.codeOlogy.booktheshow.entity.ShowsSeat;
  *         Website : blogsnax.com
  */
 
-public interface ShowsSeatRepository extends JpaRepository<ShowsSeat, Long> {
+public interface CityRepository extends JpaRepository<City, Long> {
 
+    Optional<City> findByNameIgnoreCase(String name);
 }

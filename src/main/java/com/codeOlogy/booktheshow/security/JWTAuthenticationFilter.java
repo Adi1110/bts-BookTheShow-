@@ -22,36 +22,35 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-
 /**
  * @author Aditya Ranjan
- * Youtube : @Code_O_logy
- * Website : blogsnax.com
+ *         Youtube : @Code_O_logy
+ *         Website : blogsnax.com
  */
 
 @Component
-public class JWTAuthenticationFilter extends OncePerRequestFilter{
+public class JWTAuthenticationFilter extends OncePerRequestFilter {
 
     private Logger logger = LoggerFactory.getLogger(OncePerRequestFilter.class);
 
     @Autowired
     private JwtUtil jwtHelper;
 
-
     @Autowired
     private UserDetailsService userDetailsService;
 
     @Override
-    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
 
         String requestHeader = request.getHeader("Authorization");
-        //Bearer 2352345235sdfrsfgsdfsdf
+        // Bearer 2352345235sdfrsfgsdfsdf
         logger.info(" Header :  {}", requestHeader);
         String username = null;
         String token = null;
 
         if (requestHeader != null && requestHeader.startsWith("Bearer")) {
-            //looking good
+            // looking good
             token = requestHeader.substring(7);
             try {
 
@@ -71,36 +70,32 @@ public class JWTAuthenticationFilter extends OncePerRequestFilter{
 
             }
 
-
         } else {
             logger.info("Invalid Header Value !! ");
         }
 
-
         //
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
 
-
-            //fetch user detail from username
+            // fetch user detail from username
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
             Boolean validateToken = this.jwtHelper.validateToken(token, userDetails);
             if (validateToken) {
 
-                //set the authentication
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                // set the authentication
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-
 
             } else {
                 logger.info("Validation fails !!");
             }
-
 
         }
 
         filterChain.doFilter(request, response);
 
     }
-    
+
 }

@@ -1,13 +1,17 @@
 package com.codeOlogy.booktheshow.services;
 
-import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import com.codeOlogy.booktheshow.entity.City;
+import com.codeOlogy.booktheshow.entity.Movies;
 import com.codeOlogy.booktheshow.entity.Shows;
+import com.codeOlogy.booktheshow.repository.CityRepository;
+import com.codeOlogy.booktheshow.repository.MoviesRepository;
 import com.codeOlogy.booktheshow.repository.ShowsRepository;
 
 /**
@@ -20,18 +24,48 @@ import com.codeOlogy.booktheshow.repository.ShowsRepository;
 public class MovieService {
 
     @Autowired
-    private ShowsRepository showRepository;
+    private MoviesRepository movieRepository;
 
-    public List<Shows> searchShows(String movieName, String city, LocalDate date, String time) {
-        // Retrieve all shows from the database
-        List<Shows> allShows = showRepository.findAll();
+    @Autowired
+    private ShowsRepository showsRepository;
 
-        // Use Stream API to filter shows based on the provided criteria
-        return allShows.stream()
-                .filter(show -> movieName == null || show.getMovies().stream()
-                        .anyMatch(movie -> movie.getMovieTitle().equalsIgnoreCase(movieName)))
-                .filter(show -> time == null || show.getShowTime().equalsIgnoreCase(time))
-                .filter(show -> date == null || show.getShowDate().isEqual(date))
-                .collect(Collectors.toList());
+    @Autowired
+    private CityRepository cityRepository;
+
+    public void saveMovies(List<Movies> movies) {
+        for (Movies movie : movies) {
+            Optional<Movies> existingMovie = movieRepository.findByMovieTitleAndReleaseDate(
+                    movie.getMovieTitle(), movie.getReleaseDate());
+            if (existingMovie.isPresent()) {
+                // Update existing movie details
+                Movies movieToUpdate = existingMovie.get();
+                movieToUpdate.setMovieDescription(movie.getMovieDescription());
+                movieToUpdate.setGenre(movie.getGenre());
+                movieToUpdate.setLanguage(movie.getLanguage());
+                movieToUpdate.setDuration(movie.getDuration());
+                movieToUpdate.setShows(movie.getShows());
+                movieToUpdate.getCities().addAll(movie.getCities());
+                movieRepository.save(movieToUpdate);
+            } else {
+                // Save new movie
+                movieRepository.save(movie);
+            }
+        }
+    }
+
+    public Shows saveShow(Shows shows) {
+        return showsRepository.save(shows);
+    }
+
+    public City saveCity(City city) {
+        return cityRepository.save(city);
+    }
+
+    @Transactional(readOnly = true)
+    public void printMoviesWithCityNames() {
+        List<Movies> movies = movieRepository.findAll();
+        for (Movies movie : movies) {
+            System.out.println("Movie: " + movie.getMovieTitle() + ", Cities: " + movie.getCityNames());
+        }
     }
 }

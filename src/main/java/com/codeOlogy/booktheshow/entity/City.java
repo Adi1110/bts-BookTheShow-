@@ -1,13 +1,15 @@
 package com.codeOlogy.booktheshow.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.codeOlogy.booktheshow.enums.BookingStatus;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,7 +23,6 @@ import lombok.ToString;
  *         Youtube : @Code_O_logy
  *         Website : blogsnax.com
  */
-
 @Setter
 @Getter
 @NoArgsConstructor
@@ -29,22 +30,18 @@ import lombok.ToString;
 @ToString
 @Data
 @Entity
-@Table(name = "bookings")
-public class Bookings {
+@Table(name = "cities")
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long bookingId;
+    private Long id;
 
-    private String bookingDate;
-    private String userName;
-    private String movieName;
-    private String theatreName;
-    private String showTime;
-    private String showDate;
-    private List<Integer> seatNumber;
-    private String seatType;
-    private String totalCost;
+    private String name;
 
-    private BookingStatus bookingStatus;
+    @ManyToMany(mappedBy = "cities")
+    @JsonIgnore // JSON serialization annotations to avoid serializing the entire object graph.
+                // The @JsonIgnore annotation from the Jackson library can help prevent the
+                // infinite loop by ignoring the reverse reference.
+    private Set<Movies> movies = new HashSet<>();
 }
