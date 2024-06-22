@@ -43,6 +43,7 @@ public class CustomConfig {
         http.csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
+
                         .requestMatchers("/bts/**").authenticated()
                         .requestMatchers("/movies/search/moviesByName").permitAll()
                         .requestMatchers("/movies/search/moviesByGenre").permitAll()
@@ -51,6 +52,11 @@ public class CustomConfig {
                         .requestMatchers("/auth/login").permitAll()
                         .requestMatchers("/auth/register").permitAll()
                         .requestMatchers("/bts/updateUser").permitAll()
+                        // Role-based access control
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/customer/**").hasRole("CUSTOMER")
+                        .requestMatchers("/user/**").hasAnyRole("ADMIN", "CUSTOMER", "OTHER")
+
                         .anyRequest()
                         .authenticated())
                 .exceptionHandling(ex -> ex.authenticationEntryPoint(point))

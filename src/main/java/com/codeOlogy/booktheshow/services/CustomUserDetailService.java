@@ -11,22 +11,21 @@ import com.codeOlogy.booktheshow.repository.UserRepository;
 
 /**
  * @author Aditya Ranjan
- * Youtube : @Code_O_logy
- * Website : blogsnax.com
+ *         Youtube : @Code_O_logy
+ *         Website : blogsnax.com
  */
 
 @Service
-public class CustomUserDetailService implements UserDetailsService{
+public class CustomUserDetailService implements UserDetailsService {
 
 	@Autowired
 	private UserRepository userRepo;
 
-	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
 		// Retrieve the user from the database based on the provided username
-		User user =  userRepo.findByemail(username).orElseThrow(() -> new RuntimeException("user not found!!"));
+		User user = userRepo.findByemail(username).orElseThrow(() -> new RuntimeException("user not found!!"));
 
 		return user;
 	}
