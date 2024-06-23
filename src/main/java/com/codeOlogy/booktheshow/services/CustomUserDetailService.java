@@ -1,5 +1,7 @@
 package com.codeOlogy.booktheshow.services;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -25,8 +27,8 @@ public class CustomUserDetailService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
 		// Retrieve the user from the database based on the provided username
-		User user = userRepo.findByemail(username).orElseThrow(() -> new RuntimeException("user not found!!"));
+		Optional<User> user = userRepo.findByemail(username);
 
-		return user;
+		return user.map(UserImpl::new).orElseThrow(() -> new RuntimeException("user not found!!"));
 	}
 }
