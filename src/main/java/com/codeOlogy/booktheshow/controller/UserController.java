@@ -4,6 +4,7 @@ import java.security.Principal;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,28 +14,28 @@ import com.codeOlogy.booktheshow.services.UserServiceImpl;
 
 /**
  * @author Aditya Ranjan
- * Youtube : @Code_O_logy
- * Website : blogsnax.com
+ *         Youtube : @Code_O_logy
+ *         Website : blogsnax.com
  */
 
 @RestController
 @RequestMapping("/bts")
 public class UserController {
-    
+
     @Autowired
     private UserServiceImpl service;
-    
+
+    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/getUsers")
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         System.out.println("getting users.......");
         return this.service.getUsers();
     }
 
-
     @GetMapping("/current-user")
+    @PreAuthorize("hasRole('USER')")
     public String getLoggedInUser(Principal principal) {
         return principal.getName();
     }
-    
 
 }
