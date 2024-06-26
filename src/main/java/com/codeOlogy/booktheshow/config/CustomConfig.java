@@ -44,6 +44,7 @@ public class CustomConfig {
                 .cors(cors -> cors.disable())
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/bts/**").authenticated()
+                        .requestMatchers("/api/movies/**").authenticated()
                         .requestMatchers("/movies/search/moviesByName").permitAll()
                         .requestMatchers("/movies/search/moviesByGenre").permitAll()
                         .requestMatchers("/movies/search/moviesByLanguage").permitAll()
