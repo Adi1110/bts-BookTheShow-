@@ -1,0 +1,11 @@
+use booktheshow;
+select * from users;
+select * from roles;
+select * from users_roles;
+INSERT INTO roles (name) VALUES ('ROLE_USER');
+INSERT INTO roles (name) VALUES ('ROLE_ADMIN');
+
+INSERT INTO users (first_name, last_name, email, password, roles) VALUES ('Admin3', 'admin3', 'admin3@example.com', '$2a$10$aVy.QbdGKC9Zh99QEC0x7Oh67WyQ0DV47QxN0B4O66pLLc23jL3xC', 'ADMIN'); -- admin3123
+INSERT INTO users_roles (user_id, role_id) VALUES (2, 1);
+ -- @dmin123 ADMIN
+ -- adi123 USER
